@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events-JavaScript</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="blue"></div>
+    <div class="heading">
+      <div class="space"></div>
+      <div class="head">
+        <h1>
+          -: Events: link :-<br />-: Events: button :-<br />-: Events: mouse
+          :-<br />-: Events: fields :-
+        </h1>
+      </div>
+      <div class="space"></div>
+    </div>
+    <div class="blue-buttom">
+      <div class="para">
+        Assinment # 45-48 <br />
+        JAVASCRIPT
+      </div>
+    </div>
+    <div class="chap">
+      <h1><br />C h a p t e r s</h1>
+      <br />
+    </div>
+
+    <div class="moiz">
+      <h1>-: Events: link :-</h1>
+      <p class="ali">
+        A good website is a responsive website. The user does something—clicks a button, <br>
+moves the mouse, presses a key—and something happens. JavaScript gives you many ways to<br>
+respond to the user's needs. A few examples:<br>
+The user clicks a button saying "Our Guarantee" and an alert displays spelling out the<br>
+guarantee.<br>
+A page displays a "before" picture of a model. When the user mouses over the picture, it<br>
+is replaced by an "after" picture of her.<br>
+The user types a number in the Ounces field on a form. When she clicks in the Grams<br>
+field, the equivalent in grams displays.<br>
+The user has entered her email address in a form, and is about to type a comment. When<br>
+she moves the cursor from the email field to the comment field, JavaScript checks to see if the<br>
+email address is valid. In this case, it isn't—she's omitted ".com" at the end of the address. A<br>
+message displays letting her know that she's entered an invalid email address.<br>
+On an online shopping site, there's a picture of a black watch. Next to it is a drop-down<br>
+list asking the user to choose a color. When she chooses, the color of the watch in the picture<br>
+changes to that color.<br>
+All of these user actions—clicking a button, moving the mouse, moving from one field to<br>
+another in a form, selecting a different option—are known as events. JavaScript code that<br>
+responds to an event—for example, displaying a guarantee or swapping an image when the<br>
+pointer hovers over it—is called an event handler.<br>
+In this chapter and the ones that immediately follow, you'll learn the oldest and most<br>
+straightforward approach to event-handling—inline event-handling. When you're writing<br>
+production code, this is not the best way to handle events, for the same reason that inline CSS<br>
+styling isn't the best way to format HTML elements. But since it's the least abstract way to do<br>
+it, it's the easiest to learn, and can serve as a stepping stone to more advanced methods. Later<br>
+in the book, you'll learn the approach that's preferred by most professionals—the scripting<br>
+approach. <br>
+Inline event-handling means that you combine bits of JavaScript with HTML markup. <br>
+Here's a line that displays a link and then displays an alert when the user clicks it.<br>
+< a href="#" onClick="alert('Hi');">Click< /a><br>
+As an HTML coder, you're familiar with the beginning and end of this markup, < a href=<br>
+and >Click</a><br>
+But when the user clicks this link, it behaves differently than normal hyperlinks. Instead of<br>
+taking the user to another page, or to a named anchor on the same page, it displays an alert<br>
+saying "Hi".<br>
+When the user clicks the link, it goes nowhere, and instead executes a JavaScript<br>
+statement, in this case calling a function.<br>
+Let's break it down.<br>
+When the user clicks the link, you don't want a new webpage to be loaded in this case, so,<br>
+instead of a URL, you place a # inside the quotation marks. This tells the browser to<br>
+reload the current page.<br>
+onClick= says, "When the button is clicked, execute the following JavaScript." onClick<br>
+isn't case-sensitive. You could write onclick, ONCLICK, or OnClIcK and it would work.<br>
+But the convention is onClick, so we'll stick with that.<br>
+A JavaScript statement (or more than one), enclosed in quotes, follows. When the user<br>
+clicks the link, it executes.<br>
+One more thing to notice: onClick="alert('Hi');" The message inside the parens is<br>
+surrounded by single quotes, not the double quotes we've been using for an alert string. In<br>
+JavaScript code, you aren't allowed to nest double quotes within double quotes or single<br>
+quotes within single quotess. Since the entire JavaScript statement is enclosed in double<br>
+quotes, you have to enclose the alert message in single quotes.<br>
+But there's a problem with the markup above. < a href="#" tells the browser to reload<br>
+the page. This means that if the user has scrolled down to the link, the click, in addition t<br>o
+running the JavaScript code, will scroll the page back to the top—an action you don't normall<br>y
+want. I've included this flawed approach, using < a href="#", because you'll run into here and <br>
+there in other people's work, but you'll probably prefer this approach:<br>
+< a href="JavaScript:void(0)" onClick="alert('Hi');">Click< /a><br>
+Now you've got exactly what you want. Nothing at all happens except for the JavaScript<br>
+that executes.<br>
+In the example above, the click executes only a single JavaScript statement. But there is<br>
+no limit to the number of JavaScript statements that you can enclose in the quotation marks. <br>No
+limit, that is, except for common sense. As you'll see, there are better ways to trigger<br>
+JavaScript than packing multiple statements into an online onClick event. But let me show you<br>
+the principle, with this example. When the user clicks, a first statement assigns 'hi' to a<br>
+variable and a second statement displays an alert specifying the variable as the message.<br>
+<b>< a href="JavaScript:void(0)" onClick="var greet"hi'; alert(greet);">Click< /a ></b><br>
+As I've said, coding professionals frown on inline JavaScript. But if you do use this<br>
+approach, it's more craftsmanlike to call a function.<br>
+Here's a function.<br>
+1 function popup(message) {<br>
+2 alert(message);<br>
+3 }<br>
+This is the event-handler that calls the function.<br>
+< a href="JavaScript:void(0)" onClick="popup('Hi');">Click< /a><br>
+When the user clicks the link, the event-handler calls the function, passing the argument<br>
+'Hi' to it. The function displays an alert saying 'Hi'.<br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Events: button :-</h1>
+      <p class="ali">
+        In the last chapter you learned how to repurpose a link to make it trigger an event when <br>
+it's clicked, instead of loading a new page. You learned to do it with inline event-handling, not<br>
+the best way, but the easiest to learn. Later in the book, you'll learn the approach that's<br>
+preferred by most professionals—the scripting approach.<br>
+But even if you're using the inline method, when you want to give the user something to<br>
+click, a more professional approach, usually, is to use a button rather than a link.<br>
+Suppose that when the user clicks a button, an alert displays saying, "Hello world!"<br>
+Here's the code.<br>
+< input type="button" value="Click" onClick="alert('Hello world!');"><br>
+The event handler is the same, whether you're coding a link or a button:<br>
+onClick="alert('Hello world!');"<br>
+But the beginning of the code is different: < input type="button" value="Click"<br>
+Some pros would argue that the button code should be enclosed in form tags, but it's not<br>
+absolutely necessary. And anyway, since we're already violating best practices by using inline<br>
+event handlers, why not scandalize the pros with multiple violations? (You'll learn more<br>
+respectable alternatives to inline event handlers later in the book.)<br>
+As an HTML coder you know that you can use an image as a hot link. The markup would<br>
+look something like this.<br>
+< a href="summary-page.html">< img src="button-sum-pg.png">< /a><br>
+You can also use an image to trigger an event. Let's say that when the user clicks an<br>
+image, an alert pops up. This is the code. Note that the code for the inline event handler is the<br>
+same as before.<br>
+< img src="button-greet.png" onClick="alert('Hello world!');"><br>
+Or, if you want to be more professional about it, you could have the event trigger a<br>
+function.<br>
+< img src="button-greet.png" onClick="greetTheUser();"><br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Events: mouse :-</h1>
+      <p class="ali">
+        You've learned how to make things happen when the user clicks a link, a button, or an <br>
+image, by using inline event-handling. Inline event handling isn't the best approach, but the <br>
+easiest to learn. Later in the book, you'll learn the approach that's preferred by most <br>
+professionals—the scripting approach. <br>
+But whether you're using the inline method or the preferred scripting method, the onClick <br>
+event is only one of many kinds of events that your code can respond to. In this chapter, you <br>'ll
+learn how to make things happen when the user mouses over something on the page, and also <br>
+when the user mouses away from it. <br>
+Suppose your page initially displays a "before" picture of a model. When the user mouses <br>
+over the picture, it is replaced by an "after" picture. You might prefer to do this with CSS, <br> but
+since this is a JavaScript book, I'll show you how to do it with an event handler. <br>
+This is the markup that replaces the before picture with the after picture. <br>
+< img src="before-pic.jpg" onMouseover="src='after-pic.jpg'"> <br>
+It begins as a plain vanilla image tag: < img src="before-pic.jpg" <br>
+Then comes the event-handling keyword. The keyword is in camelCase—optional but <br>
+widely used: onMouseover <br>
+An equal sign follows the keyword onMouseover, just as it does with onClick. Then <br>
+comes the response to the event, which is in quotes: "src='after-pic.jpg'"> <br>
+You may be surprised that the response to the event isn't written in JavaScript. It's HTML <br>
+markup. <br>
+Note: The image source must be enclosed in single quotes, because of those double <br>
+quotes that enclose the whole phrase. <br>
+You can use onMouseover event handling with other HTML elements, too. Here's a bit of <br>
+inline code that displays an alert when a heading is moused over. <br>
+< h1 onMouseover="alert('Be sure to get your shopping done today.');">World Ends Tomorrow< /h <br>1>
+When the user mouses over the head, an alert displays. <br>
+In the example above, you might prefer to call a function that displays the alert rather than <br>
+code the alert inline. <br>
+Here's a JavaScript alternative to the preferred CSS color-change on hover. <br>
+< a href="index.html" onMouseover="this.style.color='green';">Home Page< /a> <br>
+When the user mouses over the link, it turns green. <br>
+At this point don't be concerned about the overall idea behind this.style.color in the <br>
+151 <br>
+example. For now, just memorize the sequence so you can repeat it in the exercises. <br>
+In the next example, the paragraph expands to include more information when the user <br>
+hovers over it. <br>
+< p id="loris" onMouseover="expand();">Slow Loris: Mouse over for more info< /p> <br>
+At this point don't worry now about how the function expand grows the paragraph. You'll <br>
+learn about that later. <br>
+In the example we started with, the model's before-and-after pictures, the onMouseover <br>
+event handler replaces the "before" picture with the "after" picture when the user mouses ove <br>r
+the image. Normally, you'd want the image to revert to the original when the user mouses away <br>
+from the picture. So you'd combine the onMouseover event handler with the onMouseout event <br>
+handler. <br>
+< img src="before-pic.jpg" onMouseover="src='after-pic.jpg'" <br>
+onMouseout="src='before-pic.jpg'"> <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Events: fields :-</h1>
+      <p class="ali">
+        Let's say you have a text field for the user's email address. When the user clicks in the <br>
+field to type her entry, the field turns yellow. <br>
+This is the markup that makes it happen. <br>
+Email:<br>
+< input type="text" size="30" onFocus="this.style.backgroundColor='yellow';"> <br>
+Once again, I'm showing you the not-recommended inline way to handle an event, using it <br>
+as a stepping stone for learning more professional event-handling later in the book. Again, I'm <br>
+not explaining this.style.backgroundColor. Just memorize the sequence to use in the <br>
+exercises. <br>
+The keyword here is onFocus. It tells JavaScript to do something when the user clicks in <br>
+the field. <br>
+The syntax is the same as for other event handlers that you've already learned to code: a <br>
+keyword, followed by an equal sign, followed by JavaScript or HTML in quotes. <br>
+After the user enters her email address—or not—and clicks outside the field or presses <br>
+the tab key to move to another field—that is, when this field no longer has the focus—you want <br>
+it to revert to a white background. You do this with the onBlur keyword, which is the opposite <br>
+of onFocus. <br>
+This markup handles both the onFocus and the onBlur events. <br>
+Email:<br>
+< input type="text" size="30" onFocus="this.style.backgroundColor='yellow';" <br>
+onBlur="this.style.backgroundColor='white';"> <br> <br>
+When the user clicks into the field, it turns yellow. When she clicks out of the field, it <br>
+reverts to white. <br>
+A slightly more professional approach would be to call functions that accomplish the <br>
+same things. <br>
+Email:<br>
+< input type="text" size="30" onFocus="makeFieldYellow();" onBlur="makeFieldWhite();"> <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>Assignment</h1>
+      <p class="ali">
+        <object data="./boCftp_.pdf" type="application/pdf" width="100%" height="500px">
+          <p>
+            Unable to display PDF file.
+            <a href="./boCftp_.pdf">Download</a>
+            instead.
+          </p>
+        </object>
+      </p>
+    </div>
+    <div class="chap">
+      <h1><br />Perform The Assignment</h1>
+      <br />
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
