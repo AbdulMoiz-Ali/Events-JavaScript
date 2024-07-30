@@ -13,14 +13,15 @@
       <div class="head">
         <h1>
           -: Events: link :-<br />-: Events: button :-<br />-: Events: mouse
-          :-<br />-: Events: fields :-
+          :-<br />-: Events: fields :- <br>-: Reading field values :- <br>-: Setting field values :- <br>
+          -: Reading and setting paragraph text :- <br>-: Manipulating images and text :-
         </h1>
       </div>
       <div class="space"></div>
     </div>
     <div class="blue-buttom">
       <div class="para">
-        Assinment # 45-48 <br />
+        Assinment # 45-52 <br />
         JAVASCRIPT
       </div>
     </div>
@@ -222,6 +223,207 @@ A slightly more professional approach would be to call functions that accomplish
 same things. <br>
 Email:<br>
 < input type="text" size="30" onFocus="makeFieldYellow();" onBlur="makeFieldWhite();"> <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Reading field values :-</h1>
+      <p class="ali">
+        Suppose you've included an email field in a form, and you've made it a required field. <br>
+The form has a submit button that the user clicks to submit the information that he's entered in <br>
+the form. <br>
+This is the markup that creates the form. I've simplified it, omitting any form action and <br>
+other attributes, including linebreaks, that don't bear on what you're learning here. <br>
+< form> <br>
+Email: <br>
+< input type="text"> <br>
+< input type="submit" value="Submit"> <br>
+< /form> <br>
+So now in our stripped-down form markup, we've got these three elements: <br>
+1. The text "Email" <br>
+2. The text field for the user's email address <br>
+3. The submit button <br>
+I'm going to give the email field an id. <br>
+< form> <br>
+Email: <br>
+< input type="text" id="email"> <br>
+< input type="submit" value="Submit"> <br>
+< /form> <br>
+Next, I'm going to add an event-handler, using the keyword onSubmit. <br>
+< form onSubmit="checkAddress('email');"> <br>
+Email: <br>
+< input type="text" id="email"> <br>
+< input type="submit" value="Submit"> <br>
+< /form> <br>
+Now, when the user clicks the submit button, the function checkAddress executes. Note <br>
+that, even though the action is a click on the submit button, the onSubmit event handler is in <br>
+the form tag, not in the submit button tag. That's because the submission is an event that <br>
+applies to the whole form, not the submit button. <br>
+Here's where things get interesting. When the form is submitted, the function <br>
+checkAddress looks to see if the user has entered anything in the email field. If not, the <br>
+function displays an alert reminding the user that the email address is required. <br>
+In order to do this, the function needs a way to read what's in the email field. This is <br>
+where the id that I added to the field comes in. Here's the code for the function. <br>
+1 function checkAddress(fieldId) { <br>
+2 if (document.getElementById(fieldId).value === "") { <br>
+3 alert("Email address required."); <br>
+4 } <br>
+5 } <br>
+If there's no value in the email field, an alert displays telling the user that an email <br>
+address is required. <br>
+This is the sequence you need to memorize: <br>
+1. The keyword document, followed by... <br>
+2. a dot, followed by... <br>
+3. the keyword getElementById, followed by... <br>
+4. the parameter, in parens, received from the calling code, fieldId,followed by... <br>
+5. another dot, followed by... <br>
+6. the keyword value <br>
+Note that getElementById must be in strict camelCase. If you do what comes naturally <br>
+and write getElementByID, with a cap "D," it won't work. <br>
+Some coders prefer to put the value found in the field into a variable, like this. <br>
+1 function checkAddress(fieldId) { <br>
+2 var val = document.getElementById(fieldId).value; <br>
+3 if val === "") { <br>
+4 alert("Email address required."); <br>
+5 } <br>
+6 } <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Setting field values :-</h1>
+      <p class="ali">
+        The user has entered her ZIP code in a form field. You want to save her the trouble of
+entering the city and state. So when she clicks out of the field, you fill in the city field for her.
+Let me show you how to do that. To keep things simple, we'll pretend there are only three
+ZIP codes in the U.S. We'll also pretend that the user will infallibly enter one of these codes.
+We won't check for errors. And for this example, the JavaScript code will fill in only the city
+field, not the state. Here's the relevant markup for the form. (I'm omitting a form action, a
+submit button, and everything else that's not relevant to this chapter.)
+< form>
+ZIP:<br>
+< input type="text" id="zip" onBlur="fillCity();"><br>
+City:<br>
+< input type="text" id="city">
+< /form>
+When the user clicks out of the ZIP field, the onBlur event triggers the fillCity  <br>
+function. This is the code. <br>
+1 function fillCity() { <br>
+2 var cityName; <br>
+3 var zipEntered = document.getElementById("zip").value; <br>
+4 switch (zipEntered) { <br>
+5 case "60608" : <br>
+6 cityName = "Chicago"; <br>
+7 break; <br>
+8 case "68114" : <br>
+9 cityName = "Omaha"; <br>
+10 break; <br>
+11 case "53212" : <br>
+12 cityName = "Milwaukee"; <br>
+13 } <br>
+14 document.getElementById("city").value = cityName; <br>
+15 } <br>
+This example shows that you can not only read a value in a field with <br>
+document.getElementById..., but can also "write" a value into a field. <br>
+In this case, the function assigns the value found in the ZIP field to a variable.Then, using<br>
+a switch statement, it matches the ZIP to a city name and assigns that name to a second <br>
+variable. Then, using the variable, it places the city name in the city field. <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Reading and setting paragraph text :-</h1>
+      <p class="ali">
+        Your webpage initially displays a picture of a little mammal known as the slow loris, <br>
+along with a single sentence: <br>
+Slow lorises are a group of several species of strepsirrhine primates which make up the genus <br>
+Nycticebus. Click for more. <br>
+When the user clicks the link, the paragraph expands: <br>
+Slow lorises are a group of several species of strepsirrhine primates which make up the genus <br>
+Nycticebus. They have a round head, narrow snout, large eyes, and a variety of distinctive coloration <br>
+patterns that are species-dependent. The hands and feet of slow lorises have several adaptations <br>
+that give them a pincer-like grip and enable them to grasp branches for long periods of time. Slow<br> 
+lorises have a toxic bite, a rare trait among mammals. <br>
+This is the markup. <br>
+< p id="slowLoris"> <br>
+Slow lorises are a group of several species of strepsirrhine primates which make up the genus Nycticebus. <br>
+< a href="javascript:void(0);" onClick="expandLoris();">< em>Click for more.</ em>< /a> <br>
+< /p> <br>
+An id is assigned to the paragraph, which will be used by the function. When the user <br>
+clicks the link, a function, expandLoris, is called. <br>
+This is the function. <br>
+1 function expandLoris() { <br>
+2 var expandedParagraph = "Slow lorises are a group of several species of trepsirrhine primates which <br>
+make up the genus Nycticebus. They have a round head, narrow snout, large eyes, and a variety of<br> 
+distinctive coloration patterns that are species-dependent. The hands and feet of slow lorises have several <br>
+adaptations that give them a pincer-like grip and enable them to grasp branches for long periods of time. <br>
+Slow lorises have a toxic bite, a rare trait among mammals."; <br>
+3 document.getElementById("slowLoris").innerHTML = expandedParagraph; <br>
+4 } <br>
+Line 2 assigns the long version of the text to a variable. Then, identifying the paragraph by <br>
+its id, line 3 replaces the original content, the innerHTML, with the text stored in the variable. <br>
+Almost anything, including HTML tags, can be inserted into the web page this way. For <br>
+example, you could make this list appear on the page within, say, a div with the id "lorisList". <br>
+1. Slow loris <br>
+2. Fast loris <br>
+3. Just-right loris <br>
+This is the function that loads the list markup into the div, which has been given an id of <br>
+"lorisList". <br>
+161 <br>
+1 function placeAList() { <br>
+2 var listToPlace = "< ol>< li>Slow loris</ li>< li>Fast loris</ li>< li>Just-right loris</ li></ ol>"; <br>
+3 document.getElementById("lorisList").innerHTML = listToPlace; <br>
+4 } <br>
+Line 2 assigns all the HTML for the list to a variable. Line 3 places the HTML into the <br>
+div that has been assigned the id "lorisList". <br>
+You can use document.getElementById(element id).innerHTML to read as well as <br>
+"write" the contents of an element. For example, this function assigns whatever is in the <br>
+paragraph, div, or other element with the id "content" to the variable whatsThere. <br>
+1 function peekAtContent() { <br>
+2 var whatsThere = document.getElementById("content").innerHTML; <br>
+3 } <br>
+Line 2 reads all the HTML within the element with an id of "content" and assigns it to the <br>
+variable whatsThere. If the element is, for example, a paragraph whose content is " <br>
+< em>Hello, Sailor!</ em>" the variable whatsThere captures "< em>Hello, Sailor!</ em>" <br>
+      </p>
+    </div>
+    <div class="moiz">
+      <h1>-: Manipulating images and text :-</h1>
+      <p class="ali">
+        Your webpage displays a picture of a blobfish. The blobfish is a fascinating animal, but <br>
+it's so ugly, some of your users go "Yuck." So you give them the option of making it disappear. <br>
+When they click the image, it vanishes. <br>
+You begin by giving the image an id. <br>
+< img src="Blobfish.jpg" id="ugly"... <br>
+Then you add an event handler. <br>
+< img src="blobfish.jpg" id="ugly" onClick="makeInvisible();"> <br>
+You have a CSS class for invisibility. <br>
+.hidden {display:none;} <br>
+The function called by the event handler gives the image a class of "hidden," so it <br>
+disappears. <br>
+1 function makeInvisible() { <br>
+2 document.getElementById("ugly").className = "hidden"; <br>
+3 } <br>
+When the function is called, it assigns the "hidden" class to the element with the id "ugly." <br>
+The image disappears. <br>
+Some things to keep in mind: <br>
+This is just a variation on things you've already learned, <br>
+document.getElementById(theElementId).value (for form fields) and <br>
+document.getElementById(theElementId).innerHTML (for paragraphs, divs, and <br>
+other HTML elements). <br>
+It's className, in camelCase, not class. <br>
+Assigning a class to an element this way replaces any classes that the element has been <br>
+assigned in the static markup. <br>
+If you want to add a class to an element, preserving its existing classes, you can do it. For <br>
+example, suppose you have a paragraph with a class that styles it in Verdana, size 1 em. When <br>
+the user mouses over it, you want to double its size to 2 em. But you don't want to lose the <br>
+Verdana styling of its original class. Rather than replace the class that styles it in Verdana,you  <br>
+want to retain that class and add the class that enlarges the font. Let's say the element has the id <br>
+"p1". This is the function. <br>
+1 function makeBig() { <br>
+2 document.getElementById("p1").className += " big"; <br>
+3 } <br>
+Compared with the code that replaces all the existing classes with a new one, this code <br>
+has two small differences. <br>
+It's += instead of just =. <br>
+A space before the class name is required. <br>
       </p>
     </div>
     <div class="moiz">
